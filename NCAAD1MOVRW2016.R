@@ -1,8 +1,4 @@
-#setwd("C:/Users/mr437799/Dropbox/Current/Data Projects/Football Ranking")
-#setwd("C:/Users/Matt/Dropbox/Current/Data Projects/Football Ranking")
-#setwd("~/Dropbox/Current/Data Projects/Football Ranking")
-#source('C:/Users/mr437799/Dropbox/Current/Football Ranking/FBSPathCountingMatrixUpdate.R')
-#Expecteds<-read.table("FBSExpecteds.csv")
+
 library(readr)
 pTD<-0.73
 pFG<-0.27
