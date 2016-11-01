@@ -32,7 +32,7 @@ b=rep(1,length(teams[,2]))
 #diag(A)=rep(2,length(diag(A)))
 
 #max_points=max(c(max( scores$Score1 ),max( scores$Score2 )))
-max_points=100
+#max_points=100
 
 for(i in 1:length(scores$Team1) ){
   
@@ -61,8 +61,11 @@ image(A)
 for(i in 1:length(teams[,2])){
   if(sum(A[i,])!=0){ 
     A[i,]=A[i,]/sum(A[i,])
+  } else{
+    print(paste(c("Row", i, "has a problem") ))
   }
 }
+
 #rank<-sol/norm(sol,"2")
 
 #Put in to deal with the fact that we don't neccessarily have one communication class.

@@ -1,7 +1,7 @@
 
 library(readr)
-pTD<-0.73
-pFG<-0.27
+pTD<-0.760
+pFG<-0.240 # ignore safeties and assume all TD=7
 MaxMOV<-39
 MOVChain<-matrix(rep(0,(2*MaxMOV-1)^2),nrow=2*MaxMOV-1,byrow=TRUE)
 rhs <- c(rep(0,2*MaxMOV-1-7),rep(pTD/2,4),rep(1/2,3))
