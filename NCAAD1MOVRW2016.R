@@ -90,3 +90,46 @@ FBSteams <- read_csv("http://www.masseyratings.com/scores.php?s=286577&sub=11604
 FBSRanking<-filter(rankings, Team %in% FBSteams$X2)
 
 write.csv(FBSRanking, paste("D1-FCS MOV RW ", format(Sys.time(),"%Y %m %d"),".csv",sep=""), row.names = FALSE)
+
+
+#Use Colley
+A=matrix(rep(0,length(teams$Team)^2),nrow=length(teams$Team))
+b=rep(1,length(teams$Team))
+diag(A)=rep(2,length(diag(A)))
+
+for(i in 1:length(scores$Team1) ){
+  A[ scores$Team1[i] ,scores$Team2[i]  ]=A[ scores$Team1[i] ,scores$Team2[i]  ]-1;
+  A[ scores$Team2[i] ,scores$Team1[i]  ]=A[ scores$Team2[i] ,scores$Team1[i]  ]-1;
+  A[ scores$Team1[i] ,scores$Team1[i]  ]=A[ scores$Team1[i] ,scores$Team1[i]  ]+1;
+  A[ scores$Team2[i] ,scores$Team2[i]  ]=A[ scores$Team2[i] ,scores$Team2[i]  ]+1;
+  
+  if(abs(scores$Score1[i]-scores$Score2[i])<MaxMOV){
+    Share1=Expecteds[scores$Score1[i]-scores$Score2[i]+MaxMOV]
+  }  else{
+    if(scores$Score1[i]>scores$Score2[i]){
+      Share1=1
+    } else{
+      Share1=0
+    }
+  }
+  
+  
+  Share2=-Share1
+  
+  b[ scores$Team1[i] ]=b[ scores$Team1[i] ]- Share2
+  b[ scores$Team2[i] ]=b[ scores$Team2[i] ]- Share1
+}
+
+Rating=solve(A,b)
+
+
+rankedteams<-cbind(teams,as.numeric(Rating))
+rankedteams<-rankedteams[ order(Rating,decreasing=TRUE), ]
+rankings<-cbind(seq(1,length(rankedteams$Team)),rankedteams[2:3])
+names(rankings)<-c("Ranking",names(rankings)[2],"Rating")
+row.names(rankings)<-seq(nrow(rankings))
+write.csv(rankings, paste("D1 MOV Colley ", format(Sys.time(),"%Y %m %d"),".csv",sep=""), row.names = FALSE)
+
+FBSRanking<-filter(rankings, Team %in% FBSteams$X2)
+
+write.csv(FBSRanking, paste("D1-FCS MOV Colley ", format(Sys.time(),"%Y %m %d"),".csv",sep=""), row.names = FALSE)
