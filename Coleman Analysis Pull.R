@@ -22,3 +22,7 @@ Coleman<-Coleman %>% mutate(Retro_wt_1 = ifelse(Retro_wt_1>1,Retro_wt_1/1000,Ret
 Coleman <- Coleman %>% tidyr::separate(Efficiency_1, c("Efficiency_1","Eff_dec_1")) %>% 
   mutate(Efficiency_1=as.numeric(Efficiency_1)+as.numeric(Eff_dec_1)/100) %>%
   select(-Eff_dec_1)
+
+library(ggplot2)
+
+ggplot(Coleman, aes(Pre, Retro))+geom_point(alpha=0.5)+geom_point(data=filter(Coleman, System=="RSL"), color="Purple")+expand_limits(x=0, y=0)

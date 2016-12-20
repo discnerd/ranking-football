@@ -64,6 +64,8 @@ row.names(A) <- teams$Team;
 colnames(A) <- teams$Team;
 game_graph <-graph_from_adjacency_matrix(A, mode = "directed", weighted = TRUE, diag = FALSE)
 
+A_unnormed <- A
+
 for(i in 1:length(teams$Team)){
   if(sum(A[i,])!=0){ 
     A[i,]=A[i,]/sum(A[i,])
@@ -76,7 +78,7 @@ for(i in 1:length(teams$Team)){
 library(expm)
 Rating<-t(b)%*% (A)
 for( n in 1:1000 ){
-Rating <- Rating %*% A
+  Rating <- Rating %*% A
 }
 
 
@@ -87,6 +89,8 @@ rankings<-cbind(seq(1,length(rankedteams$Team)),rankedteams[2:3])
 names(rankings)<-c("Ranking",names(rankings)[2],"Rating")
 row.names(rankings)<-seq(nrow(rankings))
 write.csv(rankings, paste("FBS MOV RW ", format(Sys.time(),"%Y %m %d"),".csv",sep=""), row.names = FALSE)
+A_RW<-A
+
 
 #Use Colley
 A=matrix(rep(0,length(teams$Team)^2),nrow=length(teams$Team))
