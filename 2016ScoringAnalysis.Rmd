@@ -1,0 +1,27 @@
+---
+title: "Calculate Props from 2016"
+output:
+  html_document: default
+  html_notebook: default
+---
+
+Data comes from http://stats.ncaa.org/rankings/change_sport_year_div, but you have to copy and paste or write a scraper.  I'm lazy this year to it's cut and paste.  Saved the table then.
+
+```{r}
+library(tidyverse)
+library(readr)
+OffScores <- read_csv("FBSScoring2016.csv")
+FBSScoring2016<-OffScores %>% as_tibble() %>%  summarise_if( is.numeric, sum)
+score_props<-FBSScoring2016 %>% mutate(scores=TDs+FG+Saf) %>% mutate_all(funs(prop = ./scores)) %>% select(TDs_prop, PAT_prop, X2PT_prop,  Def.Pts_prop, FG_prop, Saf_prop)
+
+```
+
+So for FBS, the probabilities for each value are
+
+| Score | Probability|
+|-------|------------|
+|   2   | `r score_props$Def.Pts_prop + score_props$Saf_prop` | 
+|   3   | `r score_props$FG_prop`|
+|   6   | `r score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop`|
+|   7   | `r score_props$PAT_prop`|
+|   8   | `r score_props$X2PT_prop` |
