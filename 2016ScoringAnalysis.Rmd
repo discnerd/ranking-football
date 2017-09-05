@@ -7,16 +7,85 @@ output:
 
 Data comes from http://stats.ncaa.org/rankings/change_sport_year_div, but you have to copy and paste or write a scraper.  I'm lazy this year to it's cut and paste.  Saved the table then.
 
-```{r}
+```{r FBS, include=FALSE}
 library(tidyverse)
 library(readr)
 OffScores <- read_csv("FBSScoring2016.csv")
 FBSScoring2016<-OffScores %>% as_tibble() %>%  summarise_if( is.numeric, sum)
 score_props<-FBSScoring2016 %>% mutate(scores=TDs+FG+Saf) %>% mutate_all(funs(prop = ./scores)) %>% select(TDs_prop, PAT_prop, X2PT_prop,  Def.Pts_prop, FG_prop, Saf_prop)
+rank_total <- score_props %>% select(-Saf_prop, -Def.Pts_prop, -PAT_prop, -X2PT_prop)  %>% sum
 
 ```
 
 So for FBS, the probabilities for each value are
+
+| Score | Probability| Ranking Probability |
+|-------|------------|---------------------|
+|   2   | `r score_props$Def.Pts_prop + score_props$Saf_prop` | 0|
+|   3   | `r score_props$FG_prop`| `r score_props$FG_prop/rank_total`|
+|   6   | `r score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop`| `r (score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop)/rank_total`| 
+|   7   | `r score_props$PAT_prop`|`r score_props$PAT_prop/rank_total`|
+|   8   | `r score_props$X2PT_prop` |`r score_props$X2PT_prop/rank_total` |
+
+```{r FCS, include=FALSE}
+OffScores <- read_csv("FCSScoring2016.csv")
+FCSScoring2016<-OffScores %>% as_tibble() %>%  summarise_if( is.numeric, sum)
+score_props<-FCSScoring2016 %>% mutate(scores=TDs+FG+Saf) %>% mutate_all(funs(prop = ./scores)) %>% select(TDs_prop, PAT_prop, X2PT_prop,  Def.Pts_prop, FG_prop, Saf_prop)
+rank_total <- score_props %>% select(-Saf_prop, -Def.Pts_prop, -PAT_prop, -X2PT_prop)  %>% sum
+```
+
+So for FCS, the probabilities for each value are
+
+| Score | Probability|
+|-------|------------|
+|   2   | `r score_props$Def.Pts_prop + score_props$Saf_prop` | 0|
+|   3   | `r score_props$FG_prop`| `r score_props$FG_prop/rank_total`|
+|   6   | `r score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop`| `r (score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop)/rank_total`| 
+|   7   | `r score_props$PAT_prop`|`r score_props$PAT_prop/rank_total`|
+|   8   | `r score_props$X2PT_prop` |`r score_props$X2PT_prop/rank_total` |
+
+```{r D1, include=FALSE}
+
+score_props <- bind_rows(FBSScoring2016,FCSScoring2016) %>% summarise_all(sum) %>% mutate(scores=TDs+FG+Saf) %>% mutate_all(funs(prop = ./scores)) %>% select(TDs_prop, PAT_prop, X2PT_prop,  Def.Pts_prop, FG_prop, Saf_prop)
+
+
+```
+
+So for all of D1, the probabilities for each value are
+
+| Score | Probability|
+|-------|------------|
+|   2   | `r score_props$Def.Pts_prop + score_props$Saf_prop` | 
+|   3   | `r score_props$FG_prop`|
+|   6   | `r score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop`|
+|   7   | `r score_props$PAT_prop`|
+|   8   | `r score_props$X2PT_prop` |
+
+```{r D2, include=FALSE}
+OffScores <- read_csv("D2Scoring2016.csv")
+D2Scoring2016<-OffScores %>% as_tibble() %>%  summarise_if( is.numeric, sum)
+score_props<-D2Scoring2016 %>% mutate(scores=TDs+FG+Saf) %>% mutate_all(funs(prop = ./scores)) %>% select(TDs_prop, PAT_prop, X2PT_prop,  Def.Pts_prop, FG_prop, Saf_prop)
+
+```
+
+So for DII, the probabilities for each value are
+
+| Score | Probability|
+|-------|------------|
+|   2   | `r score_props$Def.Pts_prop + score_props$Saf_prop` | 
+|   3   | `r score_props$FG_prop`|
+|   6   | `r score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop`|
+|   7   | `r score_props$PAT_prop`|
+|   8   | `r score_props$X2PT_prop` |
+
+```{r D3, include=FALSE}
+OffScores <- read_csv("D3Scoring2016.csv")
+D3Scoring2016<-OffScores %>% as_tibble() %>%  summarise_if( is.numeric, sum)
+score_props<-D3Scoring2016 %>% mutate(scores=TDs+FG+Saf) %>% mutate_all(funs(prop = ./scores)) %>% select(TDs_prop, PAT_prop, X2PT_prop,  Def.Pts_prop, FG_prop, Saf_prop)
+
+```
+
+So for DIII, the probabilities for each value are
 
 | Score | Probability|
 |-------|------------|
