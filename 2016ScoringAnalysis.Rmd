@@ -2,7 +2,7 @@
 title: "Calculate Props from 2016"
 output:
   html_document: default
-  html_notebook: default
+
 ---
 
 Data comes from http://stats.ncaa.org/rankings/change_sport_year_div, but you have to copy and paste or write a scraper.  I'm lazy this year to it's cut and paste.  Saved the table then.
@@ -36,8 +36,8 @@ rank_total <- score_props %>% select(-Saf_prop, -Def.Pts_prop, -PAT_prop, -X2PT_
 
 So for FCS, the probabilities for each value are
 
-| Score | Probability|
-|-------|------------|
+| Score | Probability| Ranking Probability |
+|-------|------------|---------------------|
 |   2   | `r score_props$Def.Pts_prop + score_props$Saf_prop` | 0|
 |   3   | `r score_props$FG_prop`| `r score_props$FG_prop/rank_total`|
 |   6   | `r score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop`| `r (score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop)/rank_total`| 
@@ -47,19 +47,19 @@ So for FCS, the probabilities for each value are
 ```{r D1, include=FALSE}
 
 score_props <- bind_rows(FBSScoring2016,FCSScoring2016) %>% summarise_all(sum) %>% mutate(scores=TDs+FG+Saf) %>% mutate_all(funs(prop = ./scores)) %>% select(TDs_prop, PAT_prop, X2PT_prop,  Def.Pts_prop, FG_prop, Saf_prop)
-
+rank_total <- score_props %>% select(-Saf_prop, -Def.Pts_prop, -PAT_prop, -X2PT_prop)  %>% sum
 
 ```
 
 So for all of D1, the probabilities for each value are
 
-| Score | Probability|
-|-------|------------|
-|   2   | `r score_props$Def.Pts_prop + score_props$Saf_prop` | 
-|   3   | `r score_props$FG_prop`|
-|   6   | `r score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop`|
-|   7   | `r score_props$PAT_prop`|
-|   8   | `r score_props$X2PT_prop` |
+| Score | Probability| Ranking Probability |
+|-------|------------|---------------------|
+|   2   | `r score_props$Def.Pts_prop + score_props$Saf_prop` | 0|
+|   3   | `r score_props$FG_prop`| `r score_props$FG_prop/rank_total`|
+|   6   | `r score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop`| `r (score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop)/rank_total`| 
+|   7   | `r score_props$PAT_prop`|`r score_props$PAT_prop/rank_total`|
+|   8   | `r score_props$X2PT_prop` |`r score_props$X2PT_prop/rank_total` |
 
 ```{r D2, include=FALSE}
 OffScores <- read_csv("D2Scoring2016.csv")
@@ -70,13 +70,13 @@ score_props<-D2Scoring2016 %>% mutate(scores=TDs+FG+Saf) %>% mutate_all(funs(pro
 
 So for DII, the probabilities for each value are
 
-| Score | Probability|
-|-------|------------|
-|   2   | `r score_props$Def.Pts_prop + score_props$Saf_prop` | 
-|   3   | `r score_props$FG_prop`|
-|   6   | `r score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop`|
-|   7   | `r score_props$PAT_prop`|
-|   8   | `r score_props$X2PT_prop` |
+| Score | Probability| Ranking Probability |
+|-------|------------|---------------------|
+|   2   | `r score_props$Def.Pts_prop + score_props$Saf_prop` | 0|
+|   3   | `r score_props$FG_prop`| `r score_props$FG_prop/rank_total`|
+|   6   | `r score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop`| `r (score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop)/rank_total`| 
+|   7   | `r score_props$PAT_prop`|`r score_props$PAT_prop/rank_total`|
+|   8   | `r score_props$X2PT_prop` |`r score_props$X2PT_prop/rank_total` |
 
 ```{r D3, include=FALSE}
 OffScores <- read_csv("D3Scoring2016.csv")
@@ -87,10 +87,10 @@ score_props<-D3Scoring2016 %>% mutate(scores=TDs+FG+Saf) %>% mutate_all(funs(pro
 
 So for DIII, the probabilities for each value are
 
-| Score | Probability|
-|-------|------------|
-|   2   | `r score_props$Def.Pts_prop + score_props$Saf_prop` | 
-|   3   | `r score_props$FG_prop`|
-|   6   | `r score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop`|
-|   7   | `r score_props$PAT_prop`|
-|   8   | `r score_props$X2PT_prop` |
+| Score | Probability| Ranking Probability |
+|-------|------------|---------------------|
+|   2   | `r score_props$Def.Pts_prop + score_props$Saf_prop` | 0|
+|   3   | `r score_props$FG_prop`| `r score_props$FG_prop/rank_total`|
+|   6   | `r score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop`| `r (score_props$TDs_prop - score_props$PAT_prop - score_props$X2PT_prop)/rank_total`| 
+|   7   | `r score_props$PAT_prop`|`r score_props$PAT_prop/rank_total`|
+|   8   | `r score_props$X2PT_prop` |`r score_props$X2PT_prop/rank_total` |
