@@ -1,0 +1,125 @@
+---
+title: "R Notebook"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(network)
+library(sna)
+library(ggnetwork)
+library(forcats)
+library(readr)
+```
+
+```{r D1Rankings, include=FALSE}
+source("NCAAD1MOVRW2017.R")
+```
+
+```{r setupD1}
+n<-network.initialize(nrow(rankedteams), directed = TRUE, multiple = FALSE, loops = TRUE)
+rankedteams <- rankedteams %>% mutate(ranking = min_rank(desc(Rating)))
+network.vertex.names(n) <- as.character(teams$Team)
+n %v% "rank" <- left_join(teams, rankedteams, c("Team"))$ranking
+n %v% "rating" <- left_join(teams, rankedteams, c("Team"))$Rating
+#n %v% "conference" <- as.character(rankedteams$Conference)
+
+network.adjacency( A_unnormed, n, ignore.eval = FALSE, names.eval = c("WinStrength"))
+
+```
+
+#D1 Top 25 
+
+```{r top25}
+rankedteams %>% filter(Ranking < 26) %>% select(-ranking) %>%knitr::kable()
+
+
+```
+
+```{r top25FBS}
+
+filter(rankedteams, Team %in% FBSteams$X2) %>% filter( min_rank( desc(Rating)) <26) %>% select(-ranking) %>% knitr::kable()
+
+
+```
+
+```{r plotNetwork}
+#net<-ggnetwork(n %s% which( n %v% "rank" < 26), layout="fruchtermanreingold")
+net<-ggnetwork(n , layout="fruchtermanreingold")
+ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
+  geom_edges(alpha=0.1)+
+  geom_nodes( aes(color=rating), alpha=0.5 ) +theme_blank()+
+  scale_color_gradient(low="purple", high="gold")#+
+#  geom_nodelabel_repel(aes(label=vertex.names))
+
+```
+
+
+```{r plottop25}
+net<-ggnetwork(n %s% which( n %v% "rank" < 26), layout="fruchtermanreingold")
+#net<-ggnetwork(n , layout="fruchtermanreingold")
+ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
+  geom_edges(aes(alpha=WinStrength), curvature = 0.2)+
+  geom_nodes(  ) +theme_blank()+
+  geom_nodelabel_repel(aes(label=vertex.names, fill=rank))+
+  scale_color_gradient(low="purple", high="gold")+
+  scale_fill_gradient(low="gold", high="purple")
+
+
+```
+
+
+
+```{r D3Rankings, include=FALSE}
+source("NCAAD3MOVRW2017.R")
+```
+
+```{r setupD3}
+n<-network.initialize(nrow(rankedteams), directed = TRUE, multiple = FALSE, loops = TRUE)
+rankedteams <- rankedteams %>% mutate(ranking = min_rank(desc(Rating)))
+network.vertex.names(n) <- as.character(teams$Team)
+n %v% "rank" <- left_join(teams, rankedteams, c("Team"))$ranking
+n %v% "rating" <- left_join(teams, rankedteams, c("Team"))$Rating
+#n %v% "conference" <- as.character(rankedteams$Conference)
+
+network.adjacency( A_unnormed, n, ignore.eval = FALSE, names.eval = c("WinStrength"))
+
+```
+
+#D3 Top 25 
+
+```{r top25D3}
+rankedteams %>% filter(Ranking < 26) %>% select(-ranking) %>%knitr::kable()
+
+
+```
+
+
+
+```{r plotNetworkD3}
+#net<-ggnetwork(n %s% which( n %v% "rank" < 26), layout="fruchtermanreingold")
+net<-ggnetwork(n , layout="fruchtermanreingold")
+ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
+  geom_edges(alpha=0.1)+
+  geom_nodes( aes(color=rating), alpha=0.5 ) +theme_blank()+
+  scale_color_gradient(low="purple", high="gold")#+
+#  geom_nodelabel_repel(aes(label=vertex.names))
+
+```
+
+
+```{r plottop25D3}
+net<-ggnetwork(n %s% which( n %v% "rank" < 26), layout="fruchtermanreingold")
+#net<-ggnetwork(n , layout="fruchtermanreingold")
+ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
+  geom_edges(aes(alpha=WinStrength), curvature = 0.2)+
+  geom_nodes(  ) +theme_blank()+
+  geom_nodelabel_repel(aes(label=vertex.names, fill=rank))+
+  scale_color_gradient(low="purple", high="gold")+
+  scale_fill_gradient(low="gold", high="purple")
+
+
+```

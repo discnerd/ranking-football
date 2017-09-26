@@ -1,10 +1,10 @@
 
-
-pFG<-0.139377 #Need to add NoPAT and 2PT for D3 because the game is different
+library(readr)
+pFG<-0.2166821 #Need to add NoPAT and 2PT for D3 because the game is different
 #pTD<-1-pFG
-pTDnoPA<-0.11967
-pTDPA<-0.69855
-pTD2P<-0.03296
+pTDnoPA<-0.0559869
+pTDPA<-0.7115179
+pTD2P<-0.0158131
 pSaf<-1-(pFG+pTDnoPA+pTDPA+pTD2P)
 
 
@@ -52,18 +52,19 @@ for(i in seq(1,(2*MaxMOV-1))){
   
 }
 Expecteds<-solve(MOVChain,rhs)
+Expecteds<-solve(MOVChain,rhs)
 #pulling data from Massey Site
-scores <- read.csv("https://www.masseyratings.com/scores.php?s=295489&sub=11620&all=1&mode=2&format=1", header=FALSE)
-teams <- read.csv("https://www.masseyratings.com/scores.php?s=295489&sub=11620&all=1&mode=2&format=2", header=FALSE)
+scores <- read.csv("https://www.masseyratings.com/scores.php?s=295489&sub=11590&all=1&mode=2&format=1", header=FALSE)
+teams <- read_csv("https://www.masseyratings.com/scores.php?s=295489&sub=11590&all=1&mode=2&format=2", col_names = FALSE)
 names(scores)<-c("Time","Date","Team1","Home1","Score1","Team2","Home2","Score2")
 names(teams)<-c("Label","Team")
 
-A=matrix(rep(0,length(teams[,2])^2),nrow=length(teams[,2]))
-b=rep(1,length(teams[,2]))
+A=matrix(rep(0,length(teams$Team)^2),nrow=length(teams$Team))
+b=rep(1,length(teams$Team))
 #diag(A)=rep(2,length(diag(A)))
 
 #max_points=max(c(max( scores$Score1 ),max( scores$Score2 )))
-#max_points=100
+max_points=100
 
 for(i in 1:length(scores$Team1) ){
   
@@ -89,25 +90,32 @@ for(i in 1:length(scores$Team1) ){
   }
 }
 image(A)
-for(i in 1:length(teams[,2])){
+A_unnormed <- A
+for(i in 1:length(teams$Team)){
   if(sum(A[i,])!=0){ 
     A[i,]=A[i,]/sum(A[i,])
-  } else{
-    print(paste(c("Row", i, "has a problem") ))
   }
 }
+#rank<-sol/norm(sol,"2")
 
-#Put in to deal with the fact that we don't 
-#neccessarily have one communication class early in the season
-A_unnormed <- A
+#Put in to deal with the fact that we don't neccessarily have one communication class.
+
 library(expm)
 Rating<-t(b)%*% (A)
 for( n in 1:1000 ){
-  Rating <- Rating %*% A
+Rating <- Rating %*% A
 }
 
 
 #Rating<-rowSums( eigen(t(A))$vectors[,eigen(t(A))$values==1])*64/sum(eigen(t(A))$values==1)
 rankedteams<-mutate(teams,Rating = as.numeric(Rating)) %>% arrange(desc(Rating)) %>% 
   mutate(Ranking =min_rank(desc(Rating))) %>% select(Ranking, Rating, Team)
-write.csv(rankedteams, paste("D3 MOV RW ", format(Sys.time(),"%Y %m %d"),".csv",sep=""), row.names = FALSE)
+
+library(readr)
+write_csv(rankedteams, paste("D1Current",".csv",sep=""))
+
+FBSteams <- read_csv("https://www.masseyratings.com/scores.php?s=295489&sub=11604&all=1&mode=2&format=2", col_names=FALSE)
+FBSRanking<-filter(rankedteams, Team %in% FBSteams$X2)
+
+write.csv(FBSRanking, paste("FBSCurrent",".csv",sep=""), row.names = FALSE)
+
