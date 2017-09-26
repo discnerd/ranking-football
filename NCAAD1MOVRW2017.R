@@ -115,10 +115,10 @@ rankedteams<-mutate(teams,Rating = as.numeric(Rating)) %>% arrange(desc(Rating))
   mutate(Ranking =min_rank(desc(Rating))) %>% select(Ranking, Rating, Team)
 
 library(readr)
-write_csv(rankedteams, paste("D1 MOV RW ", format(Sys.time(),"%Y %m %d"),".csv",sep=""))
+write_csv(rankedteams, paste("2017 Rankings/D1 MOV RW ", format(Sys.time(),"%Y %m %d"),".csv",sep=""))
 
 FBSteams <- read_csv("https://www.masseyratings.com/scores.php?s=295489&sub=11604&all=1&mode=2&format=2", col_names=FALSE)
 FBSRanking<-filter(rankedteams, Team %in% FBSteams$X2)
 
-write.csv(FBSRanking, paste("D1-FCS MOV RW ", format(Sys.time(),"%Y %m %d"),".csv",sep=""), row.names = FALSE)
+write.csv(FBSRanking, paste("2017 Rankings/D1-FCS MOV RW ", format(Sys.time(),"%Y %m %d"),".csv",sep=""), row.names = FALSE)
 

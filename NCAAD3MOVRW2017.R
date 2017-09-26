@@ -106,8 +106,8 @@ for( n in 1:1000 ){
   Rating <- Rating %*% A
 }
 
-
+library(dplyr)
 #Rating<-rowSums( eigen(t(A))$vectors[,eigen(t(A))$values==1])*64/sum(eigen(t(A))$values==1)
 rankedteams<-mutate(teams,Rating = as.numeric(Rating)) %>% arrange(desc(Rating)) %>% 
   mutate(Ranking =min_rank(desc(Rating))) %>% select(Ranking, Rating, Team)
-write.csv(rankedteams, paste("D3 MOV RW ", format(Sys.time(),"%Y %m %d"),".csv",sep=""), row.names = FALSE)
+write.csv(rankedteams, paste("2017 Rankings/D3 MOV RW ", format(Sys.time(),"%Y %m %d"),".csv",sep=""), row.names = FALSE)
