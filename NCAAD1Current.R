@@ -106,7 +106,7 @@ for( n in 1:1000 ){
 Rating <- Rating %*% A
 }
 
-
+library(tidyverse)
 #Rating<-rowSums( eigen(t(A))$vectors[,eigen(t(A))$values==1])*64/sum(eigen(t(A))$values==1)
 rankedteams<-mutate(teams,Rating = as.numeric(Rating)) %>% arrange(desc(Rating)) %>% 
   mutate(Ranking =min_rank(desc(Rating))) %>% select(Ranking, Rating, Team)

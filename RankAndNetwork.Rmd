@@ -94,6 +94,7 @@ network.adjacency( A_unnormed, n, ignore.eval = FALSE, names.eval = c("WinStreng
 ```{r top25D3}
 rankedteams %>% filter(Ranking < 26) %>% select(-ranking) %>%knitr::kable()
 
+rankedteams %>% filter(Team == " Loras") %>% select(-ranking)
 
 ```
 

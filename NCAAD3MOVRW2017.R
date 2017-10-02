@@ -67,7 +67,7 @@ b=rep(1,length(teams[,2]))
 
 for(i in 1:length(scores$Team1) ){
   
-  if(abs(scores$Score1[i]-scores$Score2[i])<39){
+  if(abs(scores$Score1[i]-scores$Score2[i]) < MaxMOV){
     Share1=Expecteds[scores$Score1[i]-scores$Score2[i]+MaxMOV]
   }  else{
     if(scores$Score1[i]>scores$Score2[i]){
@@ -89,6 +89,7 @@ for(i in 1:length(scores$Team1) ){
   }
 }
 image(A)
+A_unnormed <- A
 for(i in 1:length(teams[,2])){
   if(sum(A[i,])!=0){ 
     A[i,]=A[i,]/sum(A[i,])
@@ -99,7 +100,7 @@ for(i in 1:length(teams[,2])){
 
 #Put in to deal with the fact that we don't 
 #neccessarily have one communication class early in the season
-A_unnormed <- A
+
 library(expm)
 Rating<-t(b)%*% (A)
 for( n in 1:1000 ){

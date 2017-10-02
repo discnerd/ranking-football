@@ -26,33 +26,33 @@ rankedteams %>% filter(Ranking < 26) %>% select(-ranking) %>%knitr::kable()
 
 
 
- Ranking      Rating  Team           
---------  ----------  ---------------
-       1   23.567063  UCF            
-       2    7.817540  TCU            
-       3    7.125005  Georgia        
-       4    6.907949  Oklahoma       
-       5    6.891897  Maryland       
-       6    6.759410  Clemson        
-       7    6.438280  Notre_Dame     
-       8    5.455221  Virginia_Tech  
-       9    5.199645  USC            
-      10    4.972427  Washington     
-      11    4.778911  Oklahoma_St    
-      12    4.265673  Duke           
-      13    4.208746  Ohio_St        
-      14    4.207983  Michigan       
-      15    4.019064  Alabama        
-      16    3.934279  Texas          
-      17    3.536333  Auburn         
-      18    3.525398  West_Virginia  
-      19    2.976214  Wake_Forest    
-      20    2.866823  California     
-      21    2.740326  SMU            
-      22    2.527735  Baylor         
-      23    2.462005  Wisconsin      
-      24    2.417722  UT_San_Antonio 
-      25    2.395519  Louisville     
+ Ranking     Rating  Team          
+--------  ---------  --------------
+       1   9.322323  Clemson       
+       2   8.318624  Alabama       
+       3   7.937061  UCF           
+       4   7.796288  Georgia       
+       5   7.589662  Notre_Dame    
+       6   6.929612  TCU           
+       7   6.077243  Auburn        
+       8   6.059799  Oklahoma      
+       9   5.292479  Ohio_St       
+      10   5.173721  Oklahoma_St   
+      11   5.146311  Washington    
+      12   4.928995  Virginia_Tech 
+      13   4.041966  Penn_St       
+      14   3.409981  Miami_FL      
+      15   3.262266  USC           
+      16   3.012273  SMU           
+      17   2.958641  Washington_St 
+      18   2.917916  Oregon        
+      19   2.838090  Wake_Forest   
+      20   2.638103  West_Virginia 
+      21   2.628894  Maryland      
+      22   2.627164  Michigan      
+      23   2.479852  Iowa          
+      24   2.411139  Duke          
+      25   2.405900  Stanford      
 
 
 ```r
@@ -61,33 +61,33 @@ filter(rankedteams, Team %in% FBSteams$X2) %>% filter( min_rank( desc(Rating)) <
 
 
 
- Ranking      Rating  Team           
---------  ----------  ---------------
-       1   23.567063  UCF            
-       2    7.817540  TCU            
-       3    7.125005  Georgia        
-       4    6.907949  Oklahoma       
-       5    6.891897  Maryland       
-       6    6.759410  Clemson        
-       7    6.438280  Notre_Dame     
-       8    5.455221  Virginia_Tech  
-       9    5.199645  USC            
-      10    4.972427  Washington     
-      11    4.778911  Oklahoma_St    
-      12    4.265673  Duke           
-      13    4.208746  Ohio_St        
-      14    4.207983  Michigan       
-      15    4.019064  Alabama        
-      16    3.934279  Texas          
-      17    3.536333  Auburn         
-      18    3.525398  West_Virginia  
-      19    2.976214  Wake_Forest    
-      20    2.866823  California     
-      21    2.740326  SMU            
-      22    2.527735  Baylor         
-      23    2.462005  Wisconsin      
-      24    2.417722  UT_San_Antonio 
-      25    2.395519  Louisville     
+ Ranking     Rating  Team          
+--------  ---------  --------------
+       1   9.322323  Clemson       
+       2   8.318624  Alabama       
+       3   7.937061  UCF           
+       4   7.796288  Georgia       
+       5   7.589662  Notre_Dame    
+       6   6.929612  TCU           
+       7   6.077243  Auburn        
+       8   6.059799  Oklahoma      
+       9   5.292479  Ohio_St       
+      10   5.173721  Oklahoma_St   
+      11   5.146311  Washington    
+      12   4.928995  Virginia_Tech 
+      13   4.041966  Penn_St       
+      14   3.409981  Miami_FL      
+      15   3.262266  USC           
+      16   3.012273  SMU           
+      17   2.958641  Washington_St 
+      18   2.917916  Oregon        
+      19   2.838090  Wake_Forest   
+      20   2.638103  West_Virginia 
+      21   2.628894  Maryland      
+      22   2.627164  Michigan      
+      23   2.479852  Iowa          
+      24   2.411139  Duke          
+      25   2.405900  Stanford      
 
 
 ```r
@@ -149,33 +149,42 @@ rankedteams %>% filter(Ranking < 26) %>% select(-ranking) %>%knitr::kable()
 
 
 
- Ranking       Rating  Team           
---------  -----------  ---------------
-       1   92.9040591  Mt_Union       
-       2   57.7425569  Whitworth      
-       3   31.2858674  Hardin-Simmons 
-       4    5.5962055  Trinity_CT     
-       5    3.6030707  Wheaton_IL     
-       6    1.7398285  Brockport_St   
-       7    1.4292304  Springfield    
-       8    1.3475474  Carthage       
-       9    1.1374014  Framingham_St  
-      10    1.0184140  Hobart_&_Smith 
-      11    0.9988303  Frostburg_St   
-      12    0.9826222  Middlebury     
-      13    0.9573602  Heidelberg     
-      14    0.8850010  Frank_&_Marsh  
-      15    0.8588962  Chris_Newport  
-      16    0.8475407  Delaware_Val   
-      17    0.7962765  Rensselaer     
-      18    0.7822374  Williams       
-      19    0.7758414  St_Thomas_MN   
-      20    0.7706861  Johns_Hopkins  
-      21    0.7300150  Loras          
-      22    0.7263670  Wesleyan_CT    
-      23    0.6949447  WI_LaCrosse    
-      24    0.6684943  McDaniel_Col   
-      25    0.6571169  Buffalo_St     
+ Ranking      Rating  Team            
+--------  ----------  ----------------
+       1   65.260136  Hardin-Simmons  
+       2   13.930607  Mt_Union        
+       3    6.494255  M_Hardin-Baylor 
+       4    3.932512  Brockport_St    
+       5    3.782316  E_Texas_Bap     
+       6    3.763408  Springfield     
+       7    3.110414  Wheaton_IL      
+       8    2.749232  Delaware_Val    
+       9    2.691736  Heidelberg      
+      10    2.595981  Trinity_CT      
+      11    2.356083  Wittenberg      
+      12    2.125871  Chris_Newport   
+      13    2.114714  Wesley_DE       
+      14    2.064423  IL_Wesleyan     
+      15    2.062068  Frank_&_Marsh   
+      16    2.034996  Hobart_&_Smith  
+      17    2.027928  WI_LaCrosse     
+      18    1.992684  Framingham_St   
+      19    1.969948  N_Central_IL    
+      20    1.947630  Trine           
+      21    1.938311  WI_Platteville  
+      22    1.919808  Frostburg_St    
+      23    1.854748  Linfield        
+      24    1.800261  Carthage        
+      25    1.781959  Alfred          
+
+```r
+rankedteams %>% filter(Team == " Loras") %>% select(-ranking)
+```
+
+```
+##   Ranking   Rating   Team
+## 1      64 0.965675  Loras
+```
 
 
 
