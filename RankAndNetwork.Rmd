@@ -58,6 +58,18 @@ ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
 ```
 
 
+```{r plotNetworkFBS}
+net<-ggnetwork(n %s% which( (n %v% "vertex.names") %in% FBSteams$X2), layout="fruchtermanreingold")
+#net<-ggnetwork(n , layout="fruchtermanreingold")
+ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
+  geom_edges(alpha=0.1)+
+  geom_nodes( aes(color=rating), alpha=0.5 ) +theme_blank()+
+  scale_color_gradient(low="purple", high="gold")#+
+#  geom_nodelabel_repel(aes(label=vertex.names))
+
+```
+
+
 ```{r plottop25}
 net<-ggnetwork(n %s% which( n %v% "rank" < 26), layout="fruchtermanreingold")
 #net<-ggnetwork(n , layout="fruchtermanreingold")
