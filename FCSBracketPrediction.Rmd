@@ -11,7 +11,7 @@ library(tidyverse)
 library(Matrix)
 ```
 ```{r}
-source("NCAAD3MOVRW2017.R")
+source("NCAAD1MOVRW2017.R")
 source('C:/Users/mr437799/Dropbox/Current/Data Projects/GitHub/ranking-basketball/MarginPredictionFromCenter.R')
 
 
@@ -48,14 +48,14 @@ rankedteams
 
 ```{r}
 bids <- 1
-indices <- c(235, 159,
-             219, 208,
-             156, 41,
-             220, 81,
-             131, 125,
-             200, 23,
-             63, 105,
-             32, 224
+indices <- c(99, 203, 107,
+             199, 246, 240,
+             180, 155, 129,
+             34, 146, 35,
+             98, 102, 184,
+             183, 149, 195,
+             251, 63, 72,
+             138, 154, 185
              )
 
 #indices <- c(48,155,,,,,54,,,,,140,181,293,132,,)
@@ -97,7 +97,7 @@ shares <- c(0,Expecteds, 1)
 MOV=diag(rep(0,length(indices)))
 for( i in 1:(length(indices)-1)){
   for(j in (i+1):length(indices)){
-    MOV[i,j]= Predict_Margin(A_unnormed , c(0,Expecteds,1), indices[j], indices[i], e)
+    MOV[i,j]= Predict_Margin_Meyer(A_unnormed , c(0,Expecteds,1), indices[j], indices[i], e)
     cat(as.character(teams$Team[indices[i]])," ", as.character(teams$Team[indices[j]]), ":", MOV[i,j], "\n")
     MOV[j,i]=-MOV[i,j]
   }
@@ -115,7 +115,7 @@ rownames(MOV) <-str_trim(as.character(teams$Team[indices]))
 colnames(MOV) <-str_trim(as.character(teams$Team[indices]))
 #print(xtable::xtable(MOV), type="html")
 MOV
-save(MOV, file="D3TournamentMOV.Rdata")
+save(MOV, file="FCSTournamentMOV.Rdata")
 
 ```
 
@@ -123,27 +123,29 @@ save(MOV, file="D3TournamentMOV.Rdata")
 library(readxl)
 library(tidyverse)
 
-FootballD3Tournament <- read_excel("D3Tournament.xlsx")
-tourneyTeams<-FootballD3Tournament %>% separate(Bracket, c("Region", "Spot"),1)  %>% select(Team, Region, Spot) %>% right_join(rankedteams %>% filter(Index %in% indices)) %>% filter(!is.na(Region))  %>% mutate(Spot=as.integer(Spot)) %>% arrange(Region, Spot)
+FootballFCSTournament <- read_excel("FCSTournament.xlsx")
+tourneyTeams<-FootballFCSTournament  %>% select(Team, Region, Spot) %>% right_join(rankedteams %>% filter(Index %in% indices)) %>% filter(!is.na(Region))  %>% mutate(Spot=as.integer(Spot)) %>% arrange(Region, Spot)
 
-tourneyTeams <- tourneyTeams %>% mutate( Round2=rep(1,nrow(tourneyTeams))) 
+tourneyTeams <- tourneyTeams %>% mutate( Round1=rep(1,nrow(tourneyTeams))) 
 
-# for(i in 1:length(tourneyTeams$Team)){
-#   
-#   teams = tourneyTeams %>%
-#     filter(Region == Region[i],
-#            (Spot-1) %/%2 == (Spot[i]-1) %/%2 ,
-#            Team != Team[i]) %>%
-#     .$Team
-#   
-#   tourneyTeams$Round2[i] = 1
-#   for( team in teams){
-#     tourneyTeams$Round2[i] = tourneyTeams$Round2[i]*
-#       shares[length(shares)/2+1+
-#                MOV[which(rownames(MOV)==team),
-#                    which(rownames(MOV)==tourneyTeams$Team[i])]]
-#   }
-# }
+for(i in 1:length(tourneyTeams$Team)){
+  
+  teams = tourneyTeams %>%
+    filter(Region == Region[i],
+           (Spot-1) %/%2 == (Spot[i]-1) %/%2 ,
+           Team != Team[i]) %>%
+    .$Team
+  
+  tourneyTeams$Round2[i] = 1
+  if(length(teams)>0){
+    for( team in teams){
+      tourneyTeams$Round2[i] = tourneyTeams$Round2[i]*
+        shares[length(shares)/2+1+
+                 MOV[which(rownames(MOV)==team),
+                     which(rownames(MOV)==tourneyTeams$Team[i])]]
+    }
+  }
+}
 
 
 
@@ -234,7 +236,7 @@ for(i in 1:length(tourneyTeams$Team)){
 ```
 
 ```{r}
-tourneyTeams %>% select(-Region, -Spot, -Index, -Round2) %>% 
+tourneyTeams %>% select(-Region, -Spot, -Index, -Round1) %>% 
   arrange(desc(Champs)) %>% knitr::kable()
 ```
 

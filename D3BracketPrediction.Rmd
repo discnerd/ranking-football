@@ -56,6 +56,7 @@ indices <- c(235, 159,
              200, 23,
              63, 105,
              32, 224
+
              )
 
 #indices <- c(48,155,,,,,54,,,,,140,181,293,132,,)
@@ -148,6 +149,7 @@ tourneyTeams <- tourneyTeams %>% mutate( Round2=rep(1,nrow(tourneyTeams)))
 
 
 
+
 for(i in 1:length(tourneyTeams$Team)){
   
   teams = tourneyTeams %>% 
@@ -172,7 +174,9 @@ for(i in 1:length(tourneyTeams$Team)){
   
   teams = tourneyTeams %>% 
     filter(Region == Region[i], 
+
            (Spot-1) %/%4 != (Spot[i]-1) %/%4 , 
+
            Team != Team[i]) %>%
     .$Team
   
@@ -234,7 +238,9 @@ for(i in 1:length(tourneyTeams$Team)){
 ```
 
 ```{r}
-tourneyTeams %>% select(-Region, -Spot, -Index, -Round2) %>% 
+
+  tourneyTeams %>% select(-Region, -Spot, -Index, -Round2) %>% 
+
   arrange(desc(Champs)) %>% knitr::kable()
 ```
 
