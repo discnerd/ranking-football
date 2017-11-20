@@ -102,7 +102,7 @@ for(i in 1:length(teams[,2])){
 
 library(expm)
 Rating<-t(b)%*% (A)
-for( n in 1:1000 ){
+for( n in 1:100000 ){
   Rating <- Rating %*% A
 }
 
