@@ -52,10 +52,10 @@ for(i in seq(1,(2*MaxMOV-1))){
   
 }
 Expecteds<-solve(MOVChain,rhs)
-Expecteds<-solve(MOVChain,rhs)
+#Expecteds<-solve(MOVChain,rhs)
 #pulling data from Massey Site
-scores <- read.csv("https://www.masseyratings.com/scores.php?s=295489&sub=11590&all=1&mode=2&format=1", header=FALSE)
-teams <- read_csv("https://www.masseyratings.com/scores.php?s=295489&sub=11590&all=1&mode=2&format=2", col_names = FALSE)
+scores <- read.csv("https://www.masseyratings.com/scores.php?s=300937&sub=11590&all=1&mode=2&format=1", header=FALSE)
+teams <- read_csv("https://www.masseyratings.com/scores.php?s=300937&sub=11590&all=1&mode=2&format=2", col_names = FALSE)
 names(scores)<-c("Time","Date","Team1","Home1","Score1","Team2","Home2","Score2")
 names(teams)<-c("Label","Team")
 
@@ -64,11 +64,11 @@ b=rep(1,length(teams$Team))
 #diag(A)=rep(2,length(diag(A)))
 
 #max_points=max(c(max( scores$Score1 ),max( scores$Score2 )))
-max_points=100
+#max_points=100
 
 for(i in 1:length(scores$Team1) ){
   
-  if(abs(scores$Score1[i]-scores$Score2[i])<39){
+  if(abs(scores$Score1[i]-scores$Score2[i])<MaxMOV){
     Share1=Expecteds[scores$Score1[i]-scores$Score2[i]+MaxMOV]
   }  else{
     if(scores$Score1[i]>scores$Score2[i]){
@@ -114,7 +114,7 @@ rankedteams<-mutate(teams,Rating = as.numeric(Rating)) %>% arrange(desc(Rating))
 library(readr)
 write_csv(rankedteams, paste("D1Current",".csv",sep=""))
 
-FBSteams <- read_csv("https://www.masseyratings.com/scores.php?s=295489&sub=11604&all=1&mode=2&format=2", col_names=FALSE)
+FBSteams <- read_csv("https://www.masseyratings.com/scores.php?s=300937&sub=11604&all=1&mode=2&format=2", col_names=FALSE)
 FBSRanking<-filter(rankedteams, Team %in% FBSteams$X2)
 
 write.csv(FBSRanking, paste("FBSCurrent",".csv",sep=""), row.names = FALSE)

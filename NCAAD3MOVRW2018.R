@@ -67,7 +67,7 @@ b=rep(1,length(teams[,2]))
 
 for(i in 1:length(scores$Team1) ){
   
-  if(abs(scores$Score1[i]-scores$Score2[i])<39){
+  if(abs(scores$Score1[i]-scores$Score2[i]) < MaxMOV){
     Share1=Expecteds[scores$Score1[i]-scores$Score2[i]+MaxMOV]
   }  else{
     if(scores$Score1[i]>scores$Score2[i]){
@@ -89,6 +89,7 @@ for(i in 1:length(scores$Team1) ){
   }
 }
 image(A)
+A_unnormed <- A
 for(i in 1:length(teams[,2])){
   if(sum(A[i,])!=0){ 
     A[i,]=A[i,]/sum(A[i,])
@@ -106,12 +107,8 @@ for( n in 1:100000 ){
   Rating <- Rating %*% A
 }
 
-
-library(tidyverse)
+library(dplyr)
 #Rating<-rowSums( eigen(t(A))$vectors[,eigen(t(A))$values==1])*64/sum(eigen(t(A))$values==1)
 rankedteams<-mutate(teams,Rating = as.numeric(Rating)) %>% arrange(desc(Rating)) %>% 
   mutate(Ranking =min_rank(desc(Rating))) %>% select(Ranking, Rating, Team)
-
-library(readr)
-write_csv(rankedteams, paste("D3Current",".csv",sep=""))
-
+write.csv(rankedteams, paste("2018 Rankings/D3 MOV RW ", format(Sys.time(),"%Y %m %d"),".csv",sep=""), row.names = FALSE)
