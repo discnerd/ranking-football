@@ -16,7 +16,7 @@ library(readr)
 ```
 
 ```{r D1Rankings, include=FALSE}
-source("NCAAD1MOVRW2017.R")
+source("NCAAD1MOVRW2018.R")
 ```
 
 ```{r setupD1}
@@ -86,7 +86,7 @@ ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
 
 
 ```{r D3Rankings, include=FALSE}
-source("NCAAD3MOVRW2017.R")
+source("NCAAD3MOVRW2018.R")
 ```
 
 ```{r setupD3}
