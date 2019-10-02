@@ -16,7 +16,7 @@ library(readr)
 ```
 
 ```{r D1Rankings, include=FALSE}
-source("NCAAD1MOVRW2018.R")
+source("NCAAD1MOVRW2019.R")
 ```
 
 ```{r setupD1}
@@ -31,7 +31,7 @@ network.adjacency( A_unnormed, n, ignore.eval = FALSE, names.eval = c("WinStreng
 
 ```
 
-#D1 Top 25 
+# D1 Top 25 
 
 ```{r top25}
 rankedteams %>% filter(Ranking < 26) %>% select(-ranking) %>%knitr::kable()
@@ -86,7 +86,7 @@ ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
 
 
 ```{r D3Rankings, include=FALSE}
-source("NCAAD3MOVRW2018.R")
+source("NCAAD3MOVRW2019.R")
 ```
 
 ```{r setupD3}
@@ -101,7 +101,7 @@ network.adjacency( A_unnormed, n, ignore.eval = FALSE, names.eval = c("WinStreng
 
 ```
 
-#D3 Top 25 
+# D3 Top 25 
 
 ```{r top25D3}
 rankedteams %>% filter(Ranking < 26) %>% select(-ranking) %>%knitr::kable()
