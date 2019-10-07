@@ -1,5 +1,5 @@
 ---
-title: "R Notebook"
+title: "Football Rankings"
 output: 
   html_document: 
     keep_md: yes
@@ -133,9 +133,9 @@ ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
 net<-ggnetwork(n %s% which( n %v% "rank" < 26), layout="fruchtermanreingold")
 #net<-ggnetwork(n , layout="fruchtermanreingold")
 ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
-  geom_edges(aes(alpha=WinStrength), curvature = 0.2)+
+  geom_edges(aes(alpha=WinStrength), curvature = 0.2, arrow = arrow(length=unit(2, "points")))+
   geom_nodes(  ) +theme_blank()+
-  geom_nodelabel_repel(aes(label=vertex.names, fill=rank))+
+  geom_nodelabel_repel(aes(label=vertex.names, fill=rating))+
   scale_color_gradient(low="purple", high="gold")+
   scale_fill_gradient(low="gold", high="purple")
 ```
@@ -228,9 +228,9 @@ ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
 net<-ggnetwork(n %s% which( n %v% "rank" < 26), layout="fruchtermanreingold")
 #net<-ggnetwork(n , layout="fruchtermanreingold")
 ggplot(net, aes(x = x, y = y, xend = xend, yend = yend))+
-  geom_edges(aes(alpha=WinStrength), curvature = 0.2)+
+  geom_edges(aes(alpha=WinStrength), curvature = 0.2, arrow = arrow(length=unit(2, "points")))+
   geom_nodes(  ) +theme_blank()+
-  geom_nodelabel_repel(aes(label=vertex.names, fill=rank))+
+  geom_nodelabel_repel(aes(label=vertex.names, fill=rating))+
   scale_color_gradient(low="purple", high="gold")+
   scale_fill_gradient(low="gold", high="purple")
 ```
