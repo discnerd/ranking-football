@@ -1,5 +1,5 @@
 ---
-title: "R Notebook"
+title: "Football Rankings"
 output: 
   html_document: 
     keep_md: yes
