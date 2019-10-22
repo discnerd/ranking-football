@@ -1,0 +1,49 @@
+---
+title: "Football Rankings for Post"
+author: "Matt Rissler, PhD"
+date: "April 25, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message =  FALSE)
+library(tidyverse)
+library(readr)
+library(stringr)
+old_date="2019 10 14"
+date="2019 10 22"
+```
+
+# D1
+
+```{r D1, echo=FALSE, results="asis", warning=FALSE}
+Ranking <- read_csv(paste0("2019 Rankings/D1 MOV RW ",date,".csv"))
+oldRanking <- read_csv(paste0("2019 Rankings/D1 MOV RW ",old_date,".csv"))
+
+
+Ranking <- left_join(Ranking,oldRanking,by=c("Team")) %>% 
+  mutate(Ranking.diff = Ranking.y-Ranking.x, 
+         Rating.diff = Rating.x - Rating.y) %>%
+  select(Ranking.x, Ranking.diff,  Team, contains(".x"), Rating.diff) %>%
+  rename( Ranking=Ranking.x, Rating=Rating.x)
+
+Ranking %>% head(25) %>% knitr::kable()
+
+```
+
+# D3
+
+```{r Women, echo=FALSE, results="asis", warning=FALSE}
+Ranking <- read_csv(paste0("2019 Rankings/D3 MOV RW ",date,".csv"))
+oldRanking <- read_csv(paste0("2019 Rankings/D3 MOV RW ",old_date,".csv"))
+
+
+Ranking <- left_join(Ranking,oldRanking,by=c("Team")) %>% 
+  mutate(Ranking.diff = Ranking.y-Ranking.x, 
+         Rating.diff = Rating.x - Rating.y) %>%
+  select(Ranking.x, Ranking.diff,  Team, contains(".x"), Rating.diff) %>%
+  rename( Ranking=Ranking.x, Rating=Rating.x)
+
+Ranking %>% head(25) %>% knitr::kable()
+
+```

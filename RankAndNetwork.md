@@ -33,31 +33,31 @@ rankedteams %>% filter(Ranking < 26) %>% select(-ranking) %>%knitr::kable()
 
  Ranking      Rating  Team           
 --------  ----------  ---------------
-       1   24.141256  Ohio_St        
-       2   13.635379  Alabama        
-       3    7.080649  Oklahoma       
-       4    6.632247  LSU            
-       5    5.241785  Wisconsin      
-       6    5.187188  Georgia        
-       7    5.030091  Auburn         
-       8    4.758245  Penn_St        
-       9    4.684774  Michigan_St    
-      10    4.482197  Florida        
-      11    4.173261  UCF            
-      12    4.143951  Clemson        
-      13    4.049841  Notre_Dame     
-      14    4.031868  Missouri       
-      15    4.003343  Oregon         
-      16    3.800367  Texas          
-      17    3.499540  Washington     
-      18    2.887472  Oklahoma_St    
-      19    2.808919  Iowa_St        
-      20    2.681486  Baylor         
-      21    2.592911  California     
-      22    2.592758  North_Carolina 
-      23    2.519399  South_Carolina 
-      24    2.462527  Mississippi    
-      25    2.453368  Memphis        
+       1   20.184025  Ohio_St        
+       2    9.585563  Alabama        
+       3    7.561414  Oklahoma       
+       4    7.359572  LSU            
+       5    6.104132  Clemson        
+       6    5.869664  Wisconsin      
+       7    5.174654  Auburn         
+       8    5.066581  Florida        
+       9    4.514886  Georgia        
+      10    4.336647  Oregon         
+      11    4.124806  Penn_St        
+      12    3.750317  Utah           
+      13    3.732134  Texas          
+      14    3.603655  Washington     
+      15    3.232957  Notre_Dame     
+      16    3.008372  Baylor         
+      17    2.988885  Texas_A&M      
+      18    2.956104  Iowa_St        
+      19    2.921356  Memphis        
+      20    2.900549  USC            
+      21    2.808924  UCF            
+      22    2.748234  Missouri       
+      23    2.608578  Michigan_St    
+      24    2.604848  South_Carolina 
+      25    2.527108  Iowa           
 
 
 ```r
@@ -68,31 +68,31 @@ filter(rankedteams, Team %in% FBSteams$X2) %>% filter( min_rank( desc(Rating)) <
 
  Ranking      Rating  Team           
 --------  ----------  ---------------
-       1   24.141256  Ohio_St        
-       2   13.635379  Alabama        
-       3    7.080649  Oklahoma       
-       4    6.632247  LSU            
-       5    5.241785  Wisconsin      
-       6    5.187188  Georgia        
-       7    5.030091  Auburn         
-       8    4.758245  Penn_St        
-       9    4.684774  Michigan_St    
-      10    4.482197  Florida        
-      11    4.173261  UCF            
-      12    4.143951  Clemson        
-      13    4.049841  Notre_Dame     
-      14    4.031868  Missouri       
-      15    4.003343  Oregon         
-      16    3.800367  Texas          
-      17    3.499540  Washington     
-      18    2.887472  Oklahoma_St    
-      19    2.808919  Iowa_St        
-      20    2.681486  Baylor         
-      21    2.592911  California     
-      22    2.592758  North_Carolina 
-      23    2.519399  South_Carolina 
-      24    2.462527  Mississippi    
-      25    2.453368  Memphis        
+       1   20.184025  Ohio_St        
+       2    9.585563  Alabama        
+       3    7.561414  Oklahoma       
+       4    7.359572  LSU            
+       5    6.104132  Clemson        
+       6    5.869664  Wisconsin      
+       7    5.174654  Auburn         
+       8    5.066581  Florida        
+       9    4.514886  Georgia        
+      10    4.336647  Oregon         
+      11    4.124806  Penn_St        
+      12    3.750317  Utah           
+      13    3.732134  Texas          
+      14    3.603655  Washington     
+      15    3.232957  Notre_Dame     
+      16    3.008372  Baylor         
+      17    2.988885  Texas_A&M      
+      18    2.956104  Iowa_St        
+      19    2.921356  Memphis        
+      20    2.900549  USC            
+      21    2.808924  UCF            
+      22    2.748234  Missouri       
+      23    2.608578  Michigan_St    
+      24    2.604848  South_Carolina 
+      25    2.527108  Iowa           
 
 
 ```r
@@ -167,41 +167,41 @@ rankedteams %>% filter(Ranking < 26) %>% select(-ranking) %>%knitr::kable()
 
 
 
- Ranking      Rating  Team           
---------  ----------  ---------------
-       1   15.088058  Mt_Union       
-       2    6.866752  Wheaton_IL     
-       3    6.415227  Cortland_St    
-       4    6.199746  Redlands       
-       5    5.652665  Bridgewater_VA 
-       6    5.436215  Muhlenberg     
-       7    4.402946  Delaware_Val   
-       8    3.726166  Stevenson      
-       9    3.643196  Ithaca         
-      10    3.636253  N_Central_IL   
-      11    3.474337  Union_NY       
-      12    3.347932  Linfield       
-      13    3.080867  John_Carroll   
-      14    3.003997  Hobart_&_Smith 
-      15    2.855547  Hardin-Simmons 
-      16    2.844747  TX_Lutheran    
-      17    2.827346  Susquehanna    
-      18    2.694632  Berry          
-      19    2.653960  Johns_Hopkins  
-      20    2.541692  St_John's_MN   
-      21    2.436286  IL_Wesleyan    
-      22    2.434465  Endicott       
-      23    2.418873  Shenandoah     
-      24    2.363668  Alfred         
-      25    2.323211  Worcester_Tech 
+ Ranking      Rating  Team            
+--------  ----------  ----------------
+       1   10.789755  Mt_Union        
+       2   10.736670  Wheaton_IL      
+       3    6.433340  Bridgewater_VA  
+       4    6.013819  N_Central_IL    
+       5    5.947663  Ithaca          
+       6    5.900085  Muhlenberg      
+       7    5.287433  Redlands        
+       8    4.558434  Cortland_St     
+       9    4.412553  M_Hardin-Baylor 
+      10    4.319533  St_John's_MN    
+      11    3.862694  Linfield        
+      12    3.801841  Delaware_Val    
+      13    3.622842  Chapman         
+      14    3.205232  IL_Wesleyan     
+      15    3.066862  Susquehanna     
+      16    3.000745  Hardin-Simmons  
+      17    2.998336  Stevenson       
+      18    2.910007  Randolph-Macon  
+      19    2.750126  WI_Whitewater   
+      20    2.735437  Johns_Hopkins   
+      21    2.640591  Salisbury       
+      22    2.616430  Averett         
+      23    2.490549  Alfred          
+      24    2.353887  Whitworth       
+      25    2.321242  WI_Oshkosh      
 
 ```r
 rankedteams %>% filter(Team == " Loras") %>% select(-ranking)
 ```
 
 ```
-##   Ranking    Rating   Team
-## 1     180 0.2219363  Loras
+##   Ranking   Rating   Team
+## 1     176 0.231704  Loras
 ```
 
 
