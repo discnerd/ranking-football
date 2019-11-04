@@ -33,31 +33,31 @@ rankedteams %>% filter(Ranking < 26) %>% select(-ranking) %>%knitr::kable()
 
  Ranking      Rating  Team        
 --------  ----------  ------------
-       1   24.996465  Ohio_St     
-       2   10.706391  Alabama     
-       3    6.826014  Clemson     
-       4    6.649974  LSU         
-       5    5.427782  Wisconsin   
-       6    5.236187  Auburn      
-       7    5.092623  Oklahoma    
-       8    5.048368  Penn_St     
-       9    4.452010  Florida     
-      10    4.343951  Utah        
-      11    3.740043  Oregon      
-      12    3.711261  Georgia     
-      13    3.505267  UCF         
-      14    3.332768  Michigan    
-      15    3.206129  Texas_A&M   
-      16    3.170862  Baylor      
-      17    2.980399  Iowa_St     
-      18    2.954257  Iowa        
-      19    2.883718  Texas       
-      20    2.870187  Washington  
-      21    2.709765  Michigan_St 
-      22    2.518222  USC         
-      23    2.506525  Oklahoma_St 
-      24    2.437307  Memphis     
-      25    2.404594  Kansas_St   
+       1   22.217900  Ohio_St     
+       2   10.342287  Alabama     
+       3    7.341821  Clemson     
+       4    6.107164  LSU         
+       5    5.174158  Auburn      
+       6    4.894093  Wisconsin   
+       7    4.858868  Oklahoma    
+       8    4.629178  Penn_St     
+       9    4.476366  Oregon      
+      10    4.419254  Florida     
+      11    4.367871  Utah        
+      12    4.271719  Georgia     
+      13    3.472604  UCF         
+      14    3.377414  Texas_A&M   
+      15    3.350357  Michigan    
+      16    3.049749  Washington  
+      17    2.991697  Baylor      
+      18    2.723413  Memphis     
+      19    2.715720  Texas       
+      20    2.711252  Oklahoma_St 
+      21    2.711088  Iowa_St     
+      22    2.689442  Kansas_St   
+      23    2.655853  Navy        
+      24    2.627739  Iowa        
+      25    2.448173  Michigan_St 
 
 
 ```r
@@ -68,31 +68,31 @@ filter(rankedteams, Team %in% FBSteams$X2) %>% filter( min_rank( desc(Rating)) <
 
  Ranking      Rating  Team        
 --------  ----------  ------------
-       1   24.996465  Ohio_St     
-       2   10.706391  Alabama     
-       3    6.826014  Clemson     
-       4    6.649974  LSU         
-       5    5.427782  Wisconsin   
-       6    5.236187  Auburn      
-       7    5.092623  Oklahoma    
-       8    5.048368  Penn_St     
-       9    4.452010  Florida     
-      10    4.343951  Utah        
-      11    3.740043  Oregon      
-      12    3.711261  Georgia     
-      13    3.505267  UCF         
-      14    3.332768  Michigan    
-      15    3.206129  Texas_A&M   
-      16    3.170862  Baylor      
-      17    2.980399  Iowa_St     
-      18    2.954257  Iowa        
-      19    2.883718  Texas       
-      20    2.870187  Washington  
-      21    2.709765  Michigan_St 
-      22    2.518222  USC         
-      23    2.506525  Oklahoma_St 
-      24    2.437307  Memphis     
-      25    2.404594  Kansas_St   
+       1   22.217900  Ohio_St     
+       2   10.342287  Alabama     
+       3    7.341821  Clemson     
+       4    6.107164  LSU         
+       5    5.174158  Auburn      
+       6    4.894093  Wisconsin   
+       7    4.858868  Oklahoma    
+       8    4.629178  Penn_St     
+       9    4.476366  Oregon      
+      10    4.419254  Florida     
+      11    4.367871  Utah        
+      12    4.271719  Georgia     
+      13    3.472604  UCF         
+      14    3.377414  Texas_A&M   
+      15    3.350357  Michigan    
+      16    3.049749  Washington  
+      17    2.991697  Baylor      
+      18    2.723413  Memphis     
+      19    2.715720  Texas       
+      20    2.711252  Oklahoma_St 
+      21    2.711088  Iowa_St     
+      22    2.689442  Kansas_St   
+      23    2.655853  Navy        
+      24    2.627739  Iowa        
+      25    2.448173  Michigan_St 
 
 
 ```r
@@ -169,31 +169,31 @@ rankedteams %>% filter(Ranking < 26) %>% select(-ranking) %>%knitr::kable()
 
  Ranking      Rating  Team            
 --------  ----------  ----------------
-       1   16.299170  Wheaton_IL      
-       2   10.604124  Mt_Union        
-       3    8.783914  N_Central_IL    
-       4    5.521117  Ithaca          
-       5    5.043196  M_Hardin-Baylor 
-       6    5.019865  Redlands        
-       7    4.959888  Muhlenberg      
-       8    4.766297  Bridgewater_VA  
-       9    4.688269  St_John's_MN    
-      10    4.316374  Hardin-Simmons  
-      11    3.768542  Linfield        
-      12    3.484552  Chapman         
-      13    3.318683  Cortland_St     
-      14    3.310361  Delaware_Val    
-      15    3.026023  IL_Wesleyan     
-      16    3.023818  Berry           
-      17    2.988237  TX_Lutheran     
-      18    2.981541  WI_Whitewater   
-      19    2.922449  WI_Platteville  
-      20    2.815014  Susquehanna     
-      21    2.558505  Bethel_MN       
-      22    2.540266  Salisbury       
-      23    2.477460  WI_LaCrosse     
-      24    2.390712  Stevenson       
-      25    2.319513  Johns_Hopkins   
+       1   16.447465  Wheaton_IL      
+       2   14.411175  Mt_Union        
+       3    8.788439  N_Central_IL    
+       4    5.547891  Bridgewater_VA  
+       5    4.941008  Muhlenberg      
+       6    4.828862  M_Hardin-Baylor 
+       7    4.137272  Hardin-Simmons  
+       8    3.997341  Ithaca          
+       9    3.984881  Redlands        
+      10    3.724313  Delaware_Val    
+      11    3.647178  St_John's_MN    
+      12    3.460950  Linfield        
+      13    3.193853  Salisbury       
+      14    3.135445  WI_Whitewater   
+      15    2.980114  IL_Wesleyan     
+      16    2.952737  Union_NY        
+      17    2.929932  Susquehanna     
+      18    2.740523  Cortland_St     
+      19    2.657957  TX_Lutheran     
+      20    2.616170  WI_LaCrosse     
+      21    2.611175  WI_Platteville  
+      22    2.611090  Stevenson       
+      23    2.542431  Chapman         
+      24    2.466704  Bethel_MN       
+      25    2.453116  John_Carroll    
 
 ```r
 rankedteams %>% filter(Team == " Loras") %>% select(-ranking)
@@ -201,7 +201,7 @@ rankedteams %>% filter(Team == " Loras") %>% select(-ranking)
 
 ```
 ##   Ranking    Rating   Team
-## 1     173 0.2454292  Loras
+## 1     167 0.2590828  Loras
 ```
 
 
